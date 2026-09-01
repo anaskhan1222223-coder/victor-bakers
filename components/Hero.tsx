@@ -109,7 +109,7 @@ export default function Hero() {
 
               {/* Image card */}
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#1a120a]/60 shadow-2xl shadow-black/40">
-                <div className="relative aspect-[4/5] w-full">
+                <div className="relative aspect-[4/3] w-full md:aspect-[4/5]">
                   <Image
                     src={HERO.heroImage}
                     alt={HERO.heroImageAlt}

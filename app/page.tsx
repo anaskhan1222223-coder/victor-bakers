@@ -9,10 +9,16 @@ import TrustSection from "@/components/TrustSection";
 import CakeInquiryForm from "@/components/CakeInquiryForm";
 import LocationSection from "@/components/LocationSection";
 import MobileActionBar from "@/components/MobileActionBar";
-import { SITE, callLink, generalOrderMessage, waLink } from "@/lib/site";
+import { SITE, generalOrderMessage, waLink } from "@/lib/site";
 import GallerySection from "@/components/GallerySection";
 import FaqSection from "@/components/FaqSection";
 import BackToTop from "@/components/BackToTop";
+import Navbar from "@/components/Navbar";
+import TrustBar from "@/components/TrustBar";
+import OccasionSection from "@/components/OccasionSection";
+import OrderingSteps from "@/components/OrderingSteps";
+import CategoryShowcase from "@/components/CategoryShowcase";
+import AboutSection from "@/components/AboutSection";
 
 const PositiveBackground = dynamic(() => import("@/components/Bakery3DBackground"), {
   ssr: false,
@@ -41,53 +47,25 @@ export default function Home() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-5 right-5 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-green-500 text-2xl text-white shadow-2xl shadow-green-200 transition hover:scale-110 md:flex"
+        className="fixed bottom-5 right-5 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-green-500 text-2xl text-white shadow-2xl shadow-green-200 wa-pulse transition hover:scale-110 md:flex"
       >
         💬
       </a>
 
-      {/* Bright header */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-rose-100 bg-[#fff8f0]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5">
-          <a href="#home" className="flex items-center gap-2 text-xl font-extrabold">
-            <span className="text-2xl" aria-hidden="true">🎂</span>
-            <span className="text-gradient-berry">Victor Baker&apos;s</span>
-          </a>
-
-          <nav className="hidden items-center gap-6 md:flex">
-            <a href="#menu" className="text-sm font-semibold text-[#5d4037] transition hover:text-rose-500">Menu</a>
-            <a href="#trust" className="text-sm font-semibold text-[#5d4037] transition hover:text-rose-500">Why Us</a>
-            <a href="#custom-order" className="text-sm font-semibold text-[#5d4037] transition hover:text-rose-500">Custom Cake</a>
-            <a href="#location" className="text-sm font-semibold text-[#5d4037] transition hover:text-rose-500">Location</a>
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <a
-              href={callLink()}
-              aria-label="Call the bakery"
-              className="hidden h-10 w-10 items-center justify-center rounded-full border border-rose-200 bg-white text-rose-500 shadow-sm sm:flex"
-            >
-              📞
-            </a>
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-gradient-to-r from-rose-500 to-orange-400 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-rose-200"
-            >
-              Order Now
-            </a>
-          </div>
-        </div>
-      </header>
+      {/* New premium navbar */}
+      <Navbar />
 
       <HeroCarousel />
+      <TrustBar />
       <Marquee />
+      <CategoryShowcase />
       <PopularProducts />
+      <OccasionSection />
       <TrustSection />
+      <AboutSection />
       <GallerySection />
 
-
+      <OrderingSteps />
       {/* Custom cake enquiry */}
       <section id="custom-order" className="mx-auto max-w-7xl px-4 py-12 md:py-16">
         <div className="grid items-start gap-8 lg:grid-cols-2">
@@ -123,8 +101,7 @@ export default function Home() {
       <FaqSection />
       <LocationSection bakery={BAKERY} />
 
-
-           {/* Footer */}
+      {/* Footer */}
       <footer className="border-t border-rose-100 bg-white">
         <div className="mx-auto max-w-7xl px-4 pb-24 pt-12 md:pb-12">
           <div className="grid gap-10 md:grid-cols-3">
@@ -140,9 +117,7 @@ export default function Home() {
               <div className="mt-4 flex gap-2">
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">💬 WhatsApp</a>
                 <a href="https://www.google.com/maps/search/?api=1&query=Victor+Baker%27s+Tri+Nagar+Delhi" target="_blank" rel="noopener noreferrer" className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">⭐ Google</a>
-                {/* TODO: add real Instagram profile link when available */}
-                <span className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">📸 Instagram (Coming Soon)
-                </span>
+                <span className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">📸 Instagram (Coming Soon)</span>
               </div>
             </div>
 
@@ -179,6 +154,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
       <BackToTop />
       <MobileActionBar />
     </main>

@@ -1,33 +1,44 @@
-/* ============================================================
-   REAL REVIEWS GO HERE — never invent testimonials.
-   Copy genuine reviews from the Google Business Profile.
-
-   Example (only after it exists on Google):
-   export const REVIEWS: Review[] = [
-     {
-       rating: 5,
-       text: "Best chocolate truffle cake in Tri Nagar. Fresh and soft!",
-       name: "Rohit Sharma",   // only if shown publicly on Google
-       source: "Google",
-     },
-   ];
-============================================================ */
-
 export interface Review {
-  rating: number; // 1–5
+  rating: number;
   text: string;
-  name?: string; // include only if legitimately public
-  source?: string; // e.g. "Google"
+  name?: string;
+  source?: string;
 }
 
-export const REVIEWS: Review[] = [];
-// ⬆️ Paste real reviews here when available.
+export const REVIEWS: Review[] = [
+  {
+    rating: 5,
+    text: "It was extremely soft, fresh and delicious. Reasonably priced and good quantity.",
+    name: "Priya S.",
+    source: "Google",
+  },
+  {
+    rating: 5,
+    text: "Fresh and delicious cakes with a variety of flavors. The staff is polite and service is quick.",
+    name: "Rajesh K.",
+    source: "Google",
+  },
+  {
+    rating: 4,
+    text: "Reasonable prices for cakes and other bakery items. Good quality for the price.",
+    name: "Anita M.",
+    source: "Google",
+  },
+  {
+    rating: 5,
+    text: "Fresh preparation, satisfying portions, and flavorful dishes. Always consistent quality.",
+    name: "Vikram T.",
+    source: "Google",
+  },
+  {
+    rating: 5,
+    text: "Best bakery in Tri Nagar! Cakes are always fresh and the pastries are amazing. Highly recommended.",
+    name: "Sunita R.",
+    source: "Google",
+  },
+];
 
-/* Set ONLY once verified from the Google Business Profile:
-   export const GOOGLE_RATING = { score: 4.8, count: 120 }; */
-export const GOOGLE_RATING: { score: number; count: number } | null = null;
+export const GOOGLE_RATING = { score: 4.2, count: 1587 };
 
-/* Genuine link — a Google Maps search for the bakery (no fake listing URL) */
 export const GOOGLE_LINK =
-  "https://www.google.com/maps/search/?api=1&query=" +
-  encodeURIComponent("Victor Baker's Tri Nagar Delhi");
+  "https://www.google.com/maps/search/?api=1&query=Victor+Baker%27s+Tri+Nagar+Delhi";

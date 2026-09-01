@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useEffect } from "react";
 
 const SHOTS = [
   { src: "/images/chocolate-truffle-cake.jpg", caption: "Chocolate Truffle — our bestseller" },
+  { src: "/images/birthday-cake.jpg", caption: "Birthday classic with candles & sprinkles" },
   { src: "/images/red-velvet-cake.jpg", caption: "Red Velvet perfection" },
+  { src: "/images/anniversary-cake.jpg", caption: "Anniversary tier with fresh roses" },
+  { src: "/images/wedding-cake.jpg", caption: "Three-tier wedding elegance" },
   { src: "/images/black-forest-cake.jpg", caption: "Black Forest classic" },
+  { src: "/images/baby-shower-cake.jpg", caption: "Baby shower softness" },
+  { src: "/images/engagement-cake.jpg", caption: "Engagement ring cake" },
   { src: "/images/blueberry-cheesecake.jpg", caption: "Blueberry Cheesecake" },
+  { src: "/images/gifting-box.jpg", caption: "Gift boxes & hampers" },
   { src: "/images/chocolate-pastry.jpg", caption: "Fresh pastries daily" },
   { src: "/images/paneer-puff.jpg", caption: "Golden paneer puffs" },
   { src: "/images/veg-patty.jpg", caption: "Crispy veg patties" },
@@ -17,17 +22,20 @@ const SHOTS = [
 
 export default function GallerySection() {
   const [active, setActive] = useState<number | null>(null);
+
   useEffect(() => {
-  if (active === null) return;
-  const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setActive(null); };
-  window.addEventListener("keydown", onKey);
-  return () => window.removeEventListener("keydown", onKey);
-}, [active]);
+    if (active === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
 
   return (
     <section id="gallery" className="mx-auto max-w-7xl px-4 py-12 md:py-16">
       <div className="mb-10 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.35em] text-rose-400">
+        <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#8B5A2B]">
           Fresh From The Oven
         </p>
         <h2 className="mt-3 text-3xl font-extrabold text-[#3e2723] md:text-5xl">
@@ -43,7 +51,7 @@ export default function GallerySection() {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className="group relative aspect-square overflow-hidden rounded-2xl border border-rose-100 bg-rose-50 shadow-sm transition hover:shadow-lg hover:shadow-rose-100"
+            className="group relative aspect-square overflow-hidden rounded-2xl border border-[#E6DFD3] bg-[#fff8f0] shadow-sm transition hover:shadow-lg"
             aria-label={`View photo: ${shot.caption}`}
           >
             <div className="absolute inset-0 flex items-center justify-center text-4xl">🍰</div>
@@ -53,10 +61,12 @@ export default function GallerySection() {
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
               loading="lazy"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
               className="object-cover transition duration-700 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#3e2723]/70 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2C241B]/70 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
             <p className="absolute bottom-2 left-3 right-3 translate-y-2 text-left text-xs font-bold text-white opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
               {shot.caption}
             </p>
@@ -81,9 +91,15 @@ export default function GallerySection() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-square w-full bg-black">
-              <Image src={SHOTS[active].src} alt={SHOTS[active].caption} fill sizes="(max-width: 1024px) 90vw, 512px" className="object-contain" />
+              <Image
+                src={SHOTS[active].src}
+                alt={SHOTS[active].caption}
+                fill
+                sizes="(max-width: 1024px) 90vw, 512px"
+                className="object-contain"
+              />
             </div>
-            <p className="bg-[#fff8f0] px-5 py-3 text-center text-sm font-bold text-[#3e2723]">
+            <p className="bg-[#fff8f0] px-5 py-3 text-center text-sm font-bold text-[#2C241B]">
               {SHOTS[active].caption}
             </p>
           </div>
