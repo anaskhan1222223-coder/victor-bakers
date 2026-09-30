@@ -39,14 +39,14 @@ export default function Navbar() {
     <>
       <header className="fixed inset-x-0 top-0 z-50">
         {/* Announcement strip — collapses on scroll */}
-        <div className={`overflow-hidden transition-all duration-300 ${scrolled ? "max-h-0" : "max-h-10"}`}>
-          <div className="bg-[#2C241B] px-4 py-2 text-center text-xs font-semibold tracking-wide text-[#FDFBF7] md:text-sm">
+        <div className={`overflow-hidden transition-all duration-300 ease-[var(--ease-lux)] ${scrolled ? "max-h-0" : "max-h-10"}`}>
+          <div className="bg-chocolate px-4 py-2 text-center text-xs font-semibold tracking-wide text-cream md:text-sm">
             🕗 Open 8 AM – 10 PM · Fresh stock baked daily ·{" "}
             <a
               href={waLink("Hi! I'd like to place an order.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-[#C88A58] decoration-2 underline-offset-2 hover:text-[#C88A58]"
+              className="underline decoration-caramel decoration-2 underline-offset-2 transition-colors hover:text-caramel"
             >
               Order on WhatsApp
             </a>
@@ -54,9 +54,23 @@ export default function Navbar() {
         </div>
 
         {/* Nav row */}
-        <div className={`transition-all duration-300 ${scrolled ? "border-b border-[#E6DFD3] bg-[#FDFBF7]/95 py-3 shadow-sm backdrop-blur-md" : "bg-transparent py-4 md:py-5"}`}>
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className={`transition-all duration-300 ease-[var(--ease-lux)] ${
+            scrolled
+              ? "border-b border-border bg-cream/95 py-3 shadow-sm backdrop-blur-md"
+              : "bg-transparent py-4 md:py-5"
+          }`}
+        >
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4">
-            <Link href="#home" className={`font-display text-2xl font-bold tracking-tight ${scrolled ? "text-[#2C241B]" : "text-[#FDFBF7]"}`}>
+            <Link
+              href="#home"
+              className={`font-display text-2xl font-bold tracking-tight transition-colors ${
+                scrolled ? "text-chocolate" : "text-cream"
+              }`}
+            >
               {BAKERY_CONFIG.name}
             </Link>
 
@@ -65,19 +79,20 @@ export default function Navbar() {
                 href={waLink("Hi! I'd like to place an order.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden rounded-full bg-[#8B5A2B] px-5 py-2.5 text-sm font-bold text-[#FDFBF7] shadow-md transition-colors hover:bg-[#704822] sm:inline-block"
+                className="group hidden rounded-full bg-bronze px-5 py-2.5 text-sm font-bold text-cream shadow-bronze transition-all hover:bg-bronze-hover hover:shadow-pastry sm:inline-block"
               >
                 Order Now
+                <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
               </a>
 
               {/* THE 3-LINE BUTTON */}
               <button
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
-                className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors ${
+                className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all ${
                   scrolled
-                    ? "border-[#E6DFD3] bg-white text-[#2C241B] hover:border-[#8B5A2B]"
-                    : "border-white/30 bg-white/10 text-[#FDFBF7] backdrop-blur hover:bg-white/20"
+                    ? "border-border bg-surface text-chocolate hover:border-bronze hover:text-bronze"
+                    : "border-cream/30 bg-white/10 text-cream backdrop-blur hover:bg-white/20"
                 }`}
               >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -86,7 +101,7 @@ export default function Navbar() {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </header>
 
       {/* FULL-SCREEN MENU OVERLAY */}
@@ -97,18 +112,18 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[70] bg-[#2C241B]"
+            className="fixed inset-0 z-[70] bg-chocolate"
           >
             <div className="flex h-full flex-col overflow-y-auto">
               {/* Top row */}
               <div className="flex items-center justify-between px-5 py-5">
-                <span className="font-display text-2xl font-bold text-[#FDFBF7]">
+                <span className="font-display text-2xl font-bold text-cream">
                   {BAKERY_CONFIG.name}
                 </span>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-[#FDFBF7] transition hover:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 text-cream transition hover:bg-cream/10"
                 >
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <path d="M4 4l10 10M4 14L14 4" />
@@ -123,15 +138,17 @@ export default function Navbar() {
                     key={l.href}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 * i + 0.1, duration: 0.4 }}
+                    transition={{ delay: 0.05 * i + 0.1, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="group flex items-center gap-4 border-b border-white/10 py-4"
+                      className="group flex items-center gap-4 border-b border-cream/10 py-4 transition-colors hover:border-caramel/50"
                     >
-                      <span className="text-xs font-bold text-[#C88A58]">0{i + 1}</span>
-                      <span className="font-display text-2xl font-bold text-[#FDFBF7] transition-colors group-hover:text-[#C88A58]">
+                      <span className="text-xs font-bold text-caramel transition-colors group-hover:text-caramel-deep">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="font-display text-2xl font-bold text-cream transition-colors group-hover:text-caramel">
                         {l.label}
                       </span>
                     </Link>
@@ -143,23 +160,26 @@ export default function Navbar() {
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="mx-auto w-full max-w-4xl px-6 pb-10"
               >
                 <div className="grid grid-cols-2 gap-3">
-                  <a href={callLink()} className="rounded-full border-2 border-[#C88A58] px-4 py-3.5 text-center text-sm font-bold text-[#C88A58] transition hover:bg-[#C88A58]/10">
+                  <a
+                    href={callLink()}
+                    className="rounded-full border-2 border-caramel px-4 py-3.5 text-center text-sm font-bold text-caramel transition hover:bg-caramel/10"
+                  >
                     📞 Call Us
                   </a>
                   <a
                     href={waLink("Hi! I'd like to place an order.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-[#C88A58] px-4 py-3.5 text-center text-sm font-bold text-[#2C241B] transition hover:bg-[#b37545]"
+                    className="rounded-full bg-caramel px-4 py-3.5 text-center text-sm font-bold text-chocolate transition hover:bg-caramel-deep"
                   >
                     💬 Order on WhatsApp
                   </a>
                 </div>
-                <p className="mt-6 text-center text-xs text-[#FDFBF7]/50">
+                <p className="mt-6 text-center text-xs text-cream/50">
                   {BAKERY_CONFIG.address}
                 </p>
               </motion.div>

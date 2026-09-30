@@ -16,6 +16,7 @@ export interface Product {
   popular?: boolean; // shown on homepage
   seasonal?: boolean; // shown in Featured
   tag?: string;
+  weight?: string;
 }
 
 export const CATEGORY_META: {

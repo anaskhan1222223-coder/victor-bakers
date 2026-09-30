@@ -19,6 +19,7 @@ import OccasionSection from "@/components/OccasionSection";
 import OrderingSteps from "@/components/OrderingSteps";
 import CategoryShowcase from "@/components/CategoryShowcase";
 import AboutSection from "@/components/AboutSection";
+import Footer from "@/components/Footer";
 
 const PositiveBackground = dynamic(() => import("@/components/Bakery3DBackground"), {
   ssr: false,
@@ -101,60 +102,7 @@ export default function Home() {
       <FaqSection />
       <LocationSection bakery={BAKERY} />
 
-      {/* Footer */}
-      <footer className="border-t border-rose-100 bg-white">
-        <div className="mx-auto max-w-7xl px-4 pb-24 pt-12 md:pb-12">
-          <div className="grid gap-10 md:grid-cols-3">
-            <div>
-              <p className="flex items-center gap-2 text-xl font-extrabold">
-                <span className="text-2xl" aria-hidden="true">🎂</span>
-                <span className="text-gradient-berry">Victor Baker&apos;s</span>
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-[#8d6e63]">
-                A local Tri Nagar bakery crafting fresh cakes, pastries and
-                snacks every single day — for birthdays, weddings and daily cravings.
-              </p>
-              <div className="mt-4 flex gap-2">
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">💬 WhatsApp</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Victor+Baker%27s+Tri+Nagar+Delhi" target="_blank" rel="noopener noreferrer" className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">⭐ Google</a>
-                <span className="rounded-full border border-rose-200 bg-[#fff8f0] px-4 py-2 text-xs font-bold text-rose-500 transition hover:bg-rose-50">📸 Instagram (Coming Soon)</span>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold uppercase tracking-widest text-rose-400">Quick Links</h4>
-              <div className="mt-4 grid grid-cols-2 gap-2 text-sm font-semibold text-[#5d4037]">
-                <a href="#menu" className="transition hover:text-rose-500">Menu</a>
-                <a href="#gallery" className="transition hover:text-rose-500">Gallery</a>
-                <a href="#trust" className="transition hover:text-rose-500">Why Us</a>
-                <a href="#custom-order" className="transition hover:text-rose-500">Custom Cake</a>
-                <a href="#faq" className="transition hover:text-rose-500">FAQ</a>
-                <a href="#location" className="transition hover:text-rose-500">Location</a>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold uppercase tracking-widest text-rose-400">Visit Us</h4>
-              <p className="mt-4 text-sm text-[#5d4037]">{BAKERY.address}</p>
-              <p className="mt-2 text-sm text-[#5d4037]">📞 {BAKERY.phoneDisplay}</p>
-              <p className="mt-2 text-sm text-[#5d4037]">🕗 {BAKERY.timing}</p>
-              <p className="mt-3 inline-flex items-center gap-2 rounded-full border border-rose-200 bg-[#fff8f0] px-3 py-1.5 text-xs font-bold">
-                {new Date().getHours() >= 8 && new Date().getHours() < 22 ? (
-                  <><span className="h-2 w-2 rounded-full bg-green-500" /> <span className="text-green-600">Open now · closes 10 PM</span></>
-                ) : (
-                  <><span className="h-2 w-2 rounded-full bg-rose-500" /> <span className="text-rose-500">Closed · opens 8 AM</span></>
-                )}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-rose-100 pt-6 text-xs text-[#bcaaa4] md:flex-row">
-            <p>© {new Date().getFullYear()} {BAKERY.name}. All rights reserved.</p>
-            <p>Designed & developed by Anas Khan · +91 9315650503</p>
-          </div>
-        </div>
-      </footer>
-
+      <Footer />
       <BackToTop />
       <MobileActionBar />
     </main>

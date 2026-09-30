@@ -1,130 +1,165 @@
-import { GOOGLE_LINK, GOOGLE_RATING, REVIEWS } from "@/lib/reviews";
+"use client";
 
-/* All points below are verifiable business facts — no invented claims */
-const TRUST_POINTS = [
-  { icon: "🥚", title: "Eggless Available", text: "Eggless cakes for birthdays & special events." },
-  { icon: "🎨", title: "Custom Cakes", text: "Birthday, wedding, anniversary & photo cakes." },
-  { icon: "🏪", title: "Local Store", text: "Onkar Nagar, Tri Nagar — easy to find & reach." },
-  { icon: "🕗", title: "Open 8 AM – 10 PM", text: "Fresh bakes available through the day." },
-  { icon: "💬", title: "Order Direct", text: "Call or WhatsApp — no delivery-app middleman." },
+import { motion } from "framer-motion";
+import { Wheat, PartyPopper, Egg, Palette, MessageCircle, Zap, Star, ArrowUpRight } from "lucide-react";
+import { REVIEW_CONFIG, TESTIMONIALS } from "@/lib/reviews";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const POINTS = [
+  { Icon: Wheat, title: "Freshly Baked", text: "Made fresh so every bite tastes better." },
+  { Icon: PartyPopper, title: "Made for Your Celebration", text: "Birthday, anniversary, wedding or everyday craving." },
+  { Icon: Egg, title: "Eggless Options", text: "Delicious choices for every preference." },
+  { Icon: Palette, title: "Custom Designs", text: "Your idea or reference photo, turned into a cake." },
+  { Icon: MessageCircle, title: "Easy Direct Ordering", text: "Speak directly with the bakery on WhatsApp." },
+  { Icon: Zap, title: "Fast Response", text: "Quick confirmation of price & availability." },
 ];
 
 function Stars({ n }: { n: number }) {
   return (
-    <span className="text-sm tracking-widest text-amber-400" aria-label={`Rated ${n} out of 5`}>
-      {"★".repeat(Math.max(0, Math.min(5, n)))}
-      {"☆".repeat(5 - Math.max(0, Math.min(5, n)))}
+    <span className="flex gap-0.5" aria-label={`Rated ${n} out of 5`}>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <svg
+          key={i}
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill={i <= n ? "#B47A45" : "none"}
+          stroke="#B47A45"
+          strokeWidth="1.6"
+          aria-hidden="true"
+        >
+          <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z" />
+        </svg>
+      ))}
     </span>
   );
 }
 
 export default function TrustSection() {
   return (
-    <section id="trust" className="mx-auto max-w-7xl px-4 py-16">
-      {/* ---------- WHY CUSTOMERS CHOOSE ---------- */}
-      <div className="mb-10 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.35em] text-amber-500">
-          Trust & Care
-        </p>
-        <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">
-          Why Customers Choose{" "}
-          <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent">
-            Victor Baker&apos;s
-          </span>
-        </h2>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        {TRUST_POINTS.map((point) => (
-          <div
-            key={point.title}
-            className="rounded-3xl border border-white/10 bg-[#1a120a]/90 p-6 transition hover:border-amber-500/30"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-2xl">
-              {point.icon}
-            </div>
-            <h3 className="mt-4 text-sm font-extrabold text-stone-100">
-              {point.title}
-            </h3>
-            <p className="mt-1.5 text-xs leading-relaxed text-stone-400">
-              {point.text}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* ---------- CUSTOMER REVIEWS ---------- */}
-      <div className="mt-20">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h3 className="text-2xl font-extrabold text-[#3e2723] md:text-3xl">
-              Customer Reviews
-            </h3>
-            {GOOGLE_RATING ? (
-              <p className="mt-2 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-sm font-bold text-amber-300">
-                ★ {GOOGLE_RATING.score} · {GOOGLE_RATING.count} reviews on Google
-              </p>
-            ) : (
-              <p className="mt-2 text-sm text-stone-400">
-                Honest words from real customers.
-              </p>
-            )}
+    <section id="trust" className="relative z-10 border-t border-border bg-surface py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        {/* Why us — editorial numbered rows */}
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-16">
+          <div className="self-start lg:sticky lg:top-28">
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, ease: EASE }}
+              className="text-eyebrow uppercase text-caramel"
+            >
+              Why Victor Baker&apos;s
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.08 }}
+              className="mt-3 font-display text-section font-bold text-chocolate"
+            >
+              A bakery Tri Nagar has <span className="italic text-caramel">trusted</span> for decades.
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.16 }}
+              className="mt-4 text-base leading-relaxed text-mocha md:text-lg"
+            >
+              No shortcuts — just honest bakes, fair prices and warm service, every single day.
+            </motion.p>
           </div>
 
-          <a
-            href={GOOGLE_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-bold text-stone-100 transition hover:border-amber-500/50 hover:text-amber-400"
-          >
-            See us on Google ↗
-          </a>
-        </div>
-
-        {REVIEWS.length > 0 ? (
-          /* Real reviews render here automatically once added in lib/reviews.ts */
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {REVIEWS.map((review, i) => (
-              <figure
-                key={i}
-                className="flex h-full flex-col rounded-3xl border border-white/10 bg-[#1a120a]/90 p-6"
+          <div className="grid gap-x-10 sm:grid-cols-2">
+            {POINTS.map((p, i) => (
+              <motion.div
+                key={p.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, ease: EASE, delay: i * 0.05 }}
+                className="group border-t border-border py-5"
               >
-                <Stars n={review.rating} />
-                <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-stone-300">
-                  “{review.text}”
-                </blockquote>
-                {(review.name || review.source) && (
-                  <figcaption className="mt-4 text-xs font-semibold text-stone-500">
-                    {review.name ?? "A customer"}
-                    {review.source ? ` · ${review.source}` : ""}
-                  </figcaption>
-                )}
-              </figure>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-caramel">0{i + 1}</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-caramel-soft text-caramel transition-colors duration-300 group-hover:bg-caramel group-hover:text-cream">
+                    <p.Icon className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <h3 className="text-base font-bold text-chocolate">{p.title}</h3>
+                </div>
+                <p className="mt-2.5 text-sm leading-relaxed text-mocha">{p.text}</p>
+              </motion.div>
             ))}
           </div>
-        ) : (
-          /* Honest placeholder — no fake testimonials, ever */
-          <div className="rounded-[2rem] border border-dashed border-white/15 bg-white/[0.03] p-10 text-center md:p-14">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10 text-2xl">
-              ⭐
+        </div>
+
+        {/* Reviews wall */}
+        <div className="mt-20">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h3 className="font-display text-section font-bold text-chocolate">Loved by our customers</h3>
+              {REVIEW_CONFIG.showBadge && (
+                <p className="mt-3 inline-flex items-center gap-2 rounded-full border border-caramel/30 bg-caramel-soft px-4 py-1.5 text-sm font-bold text-caramel">
+                  ★ {REVIEW_CONFIG.score} · {REVIEW_CONFIG.countLabel}
+                </p>
+              )}
             </div>
-            <h4 className="mt-4 text-xl font-extrabold text-[#3e2723]">
-              Loved your cake? Tell your neighbours.
-            </h4>
-            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-stone-400">
-              Real Google reviews from our customers will appear here. Until
-              then, read and share honest experiences directly on Google.
-            </p>
             <a
-              href={GOOGLE_LINK}
+              href={REVIEW_CONFIG.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-7 py-3.5 text-sm font-bold text-stone-950 shadow-lg shadow-amber-500/20 transition hover:brightness-110"
+              className="inline-flex items-center gap-1 text-sm font-bold text-bronze transition-colors hover:text-caramel"
             >
-              See us on Google
+              {REVIEW_CONFIG.linkLabel}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
-        )}
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {TESTIMONIALS.map((r, i) => (
+              <motion.figure
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, ease: EASE, delay: i * 0.06 }}
+                className="flex h-full flex-col rounded-xl border border-border bg-cream p-6 transition-shadow duration-300 hover:shadow-pastry"
+              >
+                <Stars n={r.rating} />
+                <blockquote className="mt-3 flex-1 text-[15px] font-medium leading-relaxed text-chocolate">
+                  &ldquo;{r.text}&rdquo;
+                </blockquote>
+                <figcaption className="mt-4 text-sm font-bold text-mocha">
+                  {r.name}
+                  {r.meta && <span className="font-medium text-mocha/70"> · {r.meta}</span>}
+                </figcaption>
+              </motion.figure>
+            ))}
+
+            {/* Honest CTA tile */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, ease: EASE, delay: TESTIMONIALS.length * 0.06 }}
+              className="flex h-full flex-col justify-between rounded-xl bg-chocolate p-6"
+            >
+              <p className="font-display text-lg font-bold text-cream">Tried our cakes recently?</p>
+              <p className="mt-2 text-sm text-cream/70">Your words help neighbours discover us.</p>
+              <a
+                href={REVIEW_CONFIG.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-caramel px-5 py-3 text-center text-sm font-bold text-cream transition-colors hover:bg-bronze"
+              >
+                <Star className="h-4 w-4" aria-hidden="true" />
+                Rate us on Google
+              </a>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

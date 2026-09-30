@@ -1,18 +1,47 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════
+   VICTOR BAKER'S — LUXURY DESIGN TOKENS (v2)
+   Warm cream base · espresso ink · bronze + caramel
+   ═══════════════════════════════════════════════ */
 @theme {
-  --color-cream: #FDFBF7;
-  --color-surface: #FFFFFF;
-  --color-chocolate: #2C241B;
-  --color-mocha: #6B5E54;
-  --color-bronze: #8B5A2B;
+  /* Palette — refined toward editorial bakery */
+  --color-cream: #F8F4ED;          /* warmer page base (was #FDFBF7) */
+  --color-surface: #FFF9F0;        /* soft cream cards (was pure white) */
+  --color-chocolate: #17120F;      /* deep espresso ink (was #2C241B) */
+  --color-mocha: #6B5E54;          /* secondary text — kept, it's perfect */
+  --color-bronze: #8B5A2B;         /* primary accent — kept, great contrast */
   --color-bronze-hover: #704822;
+  --color-caramel: #B47A45;        /* NEW: soft luxury accent */
+  --color-caramel-soft: #B47A4514; /* NEW: 8% tint for hovers/chips */
   --color-border: #E6DFD3;
 
+  /* Type families (loaded in layout.tsx) */
   --font-display: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
+
+  /* Editorial type scale — the "expensive" feeling */
+  --text-hero: clamp(2.6rem, 5.2vw, 4.6rem);
+  --text-hero--line-height: 1.04;
+  --text-hero--letter-spacing: -0.025em;
+  --text-section: clamp(1.9rem, 3.4vw, 2.9rem);
+  --text-section--line-height: 1.12;
+  --text-section--letter-spacing: -0.02em;
+  --text-eyebrow: 0.72rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.22em;
+  --text-eyebrow--font-weight: 600;
+
+  /* Premium depth */
+  --shadow-pastry: 0 10px 30px -12px rgb(23 18 15 / 0.14);
+  --shadow-pastry-lg: 0 28px 60px -24px rgb(23 18 15 / 0.25);
+  --shadow-bronze: 0 8px 24px -8px rgb(139 90 43 / 0.35);
+
+  /* The ONE easing curve of the entire site */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* ── Base ── */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -34,7 +63,8 @@ h1, h2, h3, h4, h5 {
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--color-cream); }
 ::-webkit-scrollbar-thumb { background: var(--color-bronze); border-radius: 4px; }
-/* ---- Moving marquee strip ---- */
+
+/* ── Moving marquee strip ── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -44,18 +74,17 @@ h1, h2, h3, h4, h5 {
   animation: marquee 22s linear infinite;
 }
 
-/* Pause when user hovers (nice touch) */
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
-/* Respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
   }
 }
-/* ---- Final premium polish ---- */
+
+/* ── Premium micro-details ── */
 ::selection { background: #8B5A2B; color: #FDFBF7; }
 
 .text-gradient-berry {
@@ -75,6 +104,47 @@ h1, h2, h3, h4, h5 {
 }
 .wa-pulse { animation: wa-pulse 2.2s infinite; }
 
+/* ── NEW: editorial nav underline (hover grows from left) ── */
+.nav-underline { position: relative; }
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 1.5px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-lux);
+}
+.nav-underline:hover::after,
+.nav-underline.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── NEW: product card lift (used by bestseller cards) ── */
+.card-lift {
+  transition: transform 0.35s var(--ease-lux), box-shadow 0.35s var(--ease-lux);
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-pastry-lg);
+}
+
+/* ── NEW: film-grain texture (4% — felt, never seen) ── */
+.bg-grain { position: relative; }
+.bg-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ── Accessibility & motion safety ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -83,3 +153,12 @@ h1, h2, h3, h4, h5 {
     scroll-behavior: auto !important;
   }
 }
+
+html, body { overflow-x: clip; }
+
+:focus-visible {
+  outline: 2px solid #8B5A2B;
+  outline-offset: 2px;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
